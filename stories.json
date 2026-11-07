@@ -1,0 +1,616 @@
+{
+ "series": "The Colourbeard Pirates",
+ "stories": [
+  {
+   "n": 1,
+   "title": "Room on the Gangplank",
+   "blurb": "Nori helps the crew find a better way aboard.",
+   "captain": "Captain Rainbow Beard",
+   "theme": "Kindness to others",
+   "voyage": {
+    "n": 1,
+    "name": "Around the Harbour"
+   },
+   "cover": "cover-01.jpg",
+   "tint": "#49413a",
+   "audio": "story-01.mp3",
+   "seconds": 282.4,
+   "bytes": 2259322
+  },
+  {
+   "n": 2,
+   "title": "The Crooked Captain's Flag",
+   "blurb": "A paint slip gives Red a chance to speak kindly to himself.",
+   "captain": "Captain Red Beard",
+   "theme": "Kindness to ourselves",
+   "voyage": {
+    "n": 1,
+    "name": "Around the Harbour"
+   },
+   "cover": "cover-02.jpg",
+   "tint": "#533c31",
+   "audio": "story-02.mp3",
+   "seconds": 291.3,
+   "bytes": 2330375
+  },
+  {
+   "n": 3,
+   "title": "The Tide That Brought Us Wrappers",
+   "blurb": "A beach clean-up leads to a bin that clicks shut.",
+   "captain": "Captain Green Beard",
+   "theme": "Kindness to the environment",
+   "voyage": {
+    "n": 1,
+    "name": "Around the Harbour"
+   },
+   "cover": "cover-03.jpg",
+   "tint": "#4e4539",
+   "audio": "story-03.mp3",
+   "seconds": 283.9,
+   "bytes": 2271443
+  },
+  {
+   "n": 4,
+   "title": "The Boat That Wouldn't Float",
+   "blurb": "Purple tests a wider ferry for a very small passenger.",
+   "captain": "Captain Purple Beard",
+   "theme": "Building resilience",
+   "voyage": {
+    "n": 1,
+    "name": "Around the Harbour"
+   },
+   "cover": "cover-04.jpg",
+   "tint": "#52402e",
+   "audio": "story-04.mp3",
+   "seconds": 298.9,
+   "bytes": 2391188
+  },
+  {
+   "n": 5,
+   "title": "The Last Jam Star",
+   "blurb": "Two friends want different parts of the same biscuit.",
+   "captain": "Captain Gold Beard",
+   "theme": "Kindness to others",
+   "voyage": {
+    "n": 1,
+    "name": "Around the Harbour"
+   },
+   "cover": "cover-05.jpg",
+   "tint": "#504133",
+   "audio": "story-05.mp3",
+   "seconds": 276.9,
+   "bytes": 2215227
+  },
+  {
+   "n": 6,
+   "title": "The Too-Loud Ahoy",
+   "blurb": "Blue asks for a greeting that feels good to her ears.",
+   "captain": "Captain Blue Beard",
+   "theme": "Kindness to ourselves",
+   "voyage": {
+    "n": 1,
+    "name": "Around the Harbour"
+   },
+   "cover": "cover-06.jpg",
+   "tint": "#4a4037",
+   "audio": "story-06.mp3",
+   "seconds": 274.9,
+   "bytes": 2199763
+  },
+  {
+   "n": 7,
+   "title": "The Tiny Tracks on Shell Beach",
+   "blurb": "Tiny footprints send a treasure hunter the long way round.",
+   "captain": "Captain Orange Beard",
+   "theme": "Kindness to the environment",
+   "voyage": {
+    "n": 1,
+    "name": "Around the Harbour"
+   },
+   "cover": "cover-07.jpg",
+   "tint": "#544837",
+   "audio": "story-07.mp3",
+   "seconds": 264.2,
+   "bytes": 2113454
+  },
+  {
+   "n": 8,
+   "title": "The Map with a Hole in It",
+   "blurb": "A torn map leads to clues in the places Rainbow can see.",
+   "captain": "Captain Rainbow Beard",
+   "theme": "Building resilience",
+   "voyage": {
+    "n": 1,
+    "name": "Around the Harbour"
+   },
+   "cover": "cover-08.jpg",
+   "tint": "#4a3f33",
+   "audio": "story-08.mp3",
+   "seconds": 262.5,
+   "bytes": 2099870
+  },
+  {
+   "n": 9,
+   "title": "The Knock at the Galley Door",
+   "blurb": "Red listens, says sorry and helps repair a mistake.",
+   "captain": "Captain Red Beard",
+   "theme": "Kindness to others",
+   "voyage": {
+    "n": 1,
+    "name": "Around the Harbour"
+   },
+   "cover": "cover-09.jpg",
+   "tint": "#4e3423",
+   "audio": "story-09.mp3",
+   "seconds": 264.7,
+   "bytes": 2117843
+  },
+  {
+   "n": 10,
+   "title": "The Captain Who Needed a Sit-Down",
+   "blurb": "A tired cook asks for a seat and lets the crew carry on.",
+   "captain": "Captain Gold Beard",
+   "theme": "Kindness to ourselves",
+   "voyage": {
+    "n": 1,
+    "name": "Around the Harbour"
+   },
+   "cover": "cover-10.jpg",
+   "tint": "#4b3929",
+   "audio": "story-10.mp3",
+   "seconds": 266.7,
+   "bytes": 2133934
+  },
+  {
+   "n": 11,
+   "title": "The Reef That Sang at Low Tide",
+   "blurb": "The crew brings back sounds and leaves shells at the reef.",
+   "captain": "Captain Blue Beard",
+   "theme": "Kindness to the environment",
+   "voyage": {
+    "n": 2,
+    "name": "Out to the Islands"
+   },
+   "cover": "cover-11.jpg",
+   "tint": "#483d35",
+   "audio": "story-11.mp3",
+   "seconds": 281.8,
+   "bytes": 2254933
+  },
+  {
+   "n": 12,
+   "title": "Three Tries for the Kite",
+   "blurb": "A rabbit kite takes off when Orange changes direction.",
+   "captain": "Captain Orange Beard",
+   "theme": "Building resilience",
+   "voyage": {
+    "n": 2,
+    "name": "Out to the Islands"
+   },
+   "cover": "cover-12.jpg",
+   "tint": "#51493e",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 13,
+   "title": "The Two Ends of the Hammock",
+   "blurb": "Nori shows Green exactly what help they want.",
+   "captain": "Captain Green Beard",
+   "theme": "Kindness to others",
+   "voyage": {
+    "n": 2,
+    "name": "Out to the Islands"
+   },
+   "cover": "cover-13.jpg",
+   "tint": "#463c2c",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 14,
+   "title": "The Too-Many-Things Box",
+   "blurb": "Purple clears a small space and chooses one job for today.",
+   "captain": "Captain Purple Beard",
+   "theme": "Kindness to ourselves",
+   "voyage": {
+    "n": 2,
+    "name": "Out to the Islands"
+   },
+   "cover": "cover-14.jpg",
+   "tint": "#513c31",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 15,
+   "title": "The Picnic with No Flying Bits",
+   "blurb": "Tins and a clever napkin help lunch stay out of the bay.",
+   "captain": "Captain Gold Beard",
+   "theme": "Kindness to the environment",
+   "voyage": {
+    "n": 2,
+    "name": "Out to the Islands"
+   },
+   "cover": "cover-15.jpg",
+   "tint": "#4c402d",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 16,
+   "title": "The Day the Drum Went Plop",
+   "blurb": "A wet drum gives way to claps, steps and a sock.",
+   "captain": "Captain Red Beard",
+   "theme": "Building resilience",
+   "voyage": {
+    "n": 2,
+    "name": "Out to the Islands"
+   },
+   "cover": "cover-16.jpg",
+   "tint": "#4e3e32",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 17,
+   "title": "A Place for the Quiet Pirate",
+   "blurb": "The sound hunt makes room for watching and pointing.",
+   "captain": "Captain Blue Beard",
+   "theme": "Kindness to others",
+   "voyage": {
+    "n": 2,
+    "name": "Out to the Islands"
+   },
+   "cover": "cover-17.jpg",
+   "tint": "#4a3d31",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 18,
+   "title": "The Day Rainbow Missed Home",
+   "blurb": "A familiar goodnight helps Rainbow feel at home away from home.",
+   "captain": "Captain Rainbow Beard",
+   "theme": "Kindness to ourselves",
+   "voyage": {
+    "n": 2,
+    "name": "Out to the Islands"
+   },
+   "cover": "cover-18.jpg",
+   "tint": "#463530",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 19,
+   "title": "The Garden That Drank Slowly",
+   "blurb": "The crew gives six bean plants a slower drink.",
+   "captain": "Captain Green Beard",
+   "theme": "Kindness to the environment",
+   "voyage": {
+    "n": 2,
+    "name": "Out to the Islands"
+   },
+   "cover": "cover-19.jpg",
+   "tint": "#4b3a29",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 20,
+   "title": "The Bridge of Little Steps",
+   "blurb": "Purple tries the footbridge one board at a time.",
+   "captain": "Captain Purple Beard",
+   "theme": "Building resilience",
+   "voyage": {
+    "n": 2,
+    "name": "Out to the Islands"
+   },
+   "cover": "cover-20.jpg",
+   "tint": "#4b3d2e",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 21,
+   "title": "The Race She Chose to Leave",
+   "blurb": "Orange listens to her body and chooses to leave a race.",
+   "captain": "Captain Orange Beard",
+   "theme": "Kindness to ourselves",
+   "voyage": {
+    "n": 3,
+    "name": "A Change in the Weather"
+   },
+   "cover": "cover-21.jpg",
+   "tint": "#4f402b",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 22,
+   "title": "The Promise in the Tin",
+   "blurb": "Purple keeps a drawing safe until Blue chooses to share it.",
+   "captain": "Captain Purple Beard",
+   "theme": "Kindness to others",
+   "voyage": {
+    "n": 3,
+    "name": "A Change in the Weather"
+   },
+   "cover": "cover-22.jpg",
+   "tint": "#4a382d",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 23,
+   "title": "The Lanterns That Stayed on Land",
+   "blurb": "The crew lights the path and leaves the beach dark for birds.",
+   "captain": "Captain Red Beard",
+   "theme": "Kindness to the environment",
+   "voyage": {
+    "n": 3,
+    "name": "A Change in the Weather"
+   },
+   "cover": "cover-23.jpg",
+   "tint": "#362d2e",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 24,
+   "title": "The Foggy Day Dock Band",
+   "blurb": "Fog keeps the boats docked, so Blue brings the reef indoors in sound.",
+   "captain": "Captain Blue Beard",
+   "theme": "Building resilience",
+   "voyage": {
+    "n": 3,
+    "name": "A Change in the Weather"
+   },
+   "cover": "cover-24.jpg",
+   "tint": "#4c3e32",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 25,
+   "title": "The Rainy Boots Day",
+   "blurb": "Green gives herself time to feel sad about a cancelled walk.",
+   "captain": "Captain Green Beard",
+   "theme": "Kindness to ourselves",
+   "voyage": {
+    "n": 3,
+    "name": "A Change in the Weather"
+   },
+   "cover": "cover-25.jpg",
+   "tint": "#443f37",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 26,
+   "title": "The Treasure Chest with Two Keys",
+   "blurb": "Orange and Wren find a fair way to use both keys.",
+   "captain": "Captain Orange Beard",
+   "theme": "Kindness to others",
+   "voyage": {
+    "n": 3,
+    "name": "A Change in the Weather"
+   },
+   "cover": "cover-26.jpg",
+   "tint": "#4e3e2e",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 27,
+   "title": "The Sail That Got a Second Voyage",
+   "blurb": "A worn sail becomes shade without losing its patches.",
+   "captain": "Captain Rainbow Beard",
+   "theme": "Kindness to the environment",
+   "voyage": {
+    "n": 3,
+    "name": "A Change in the Weather"
+   },
+   "cover": "cover-27.jpg",
+   "tint": "#463d33",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 28,
+   "title": "The Great Pancake Flip",
+   "blurb": "A cloth, a smaller pan and some practice help Gold find his flip.",
+   "captain": "Captain Gold Beard",
+   "theme": "Building resilience",
+   "voyage": {
+    "n": 3,
+    "name": "A Change in the Weather"
+   },
+   "cover": "cover-28.jpg",
+   "tint": "#513f2c",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 29,
+   "title": "The Little Red Help Flag",
+   "blurb": "Red asks for the hand he needs and asks sooner the next time.",
+   "captain": "Captain Red Beard",
+   "theme": "Kindness to ourselves",
+   "voyage": {
+    "n": 3,
+    "name": "A Change in the Weather"
+   },
+   "cover": "cover-29.jpg",
+   "tint": "#4d4539",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 30,
+   "title": "The Bell That Fell Silent",
+   "blurb": "Rainbow keeps Pearl company as she remembers an old bell.",
+   "captain": "Captain Rainbow Beard",
+   "theme": "Kindness to others",
+   "voyage": {
+    "n": 3,
+    "name": "A Change in the Weather"
+   },
+   "cover": "cover-30.jpg",
+   "tint": "#453a31",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 31,
+   "title": "The Race Past the Reed Beds",
+   "blurb": "Orange keeps the rowing course away from a quiet duck nursery.",
+   "captain": "Captain Orange Beard",
+   "theme": "Kindness to the environment",
+   "voyage": {
+    "n": 4,
+    "name": "The Lantern Regatta"
+   },
+   "cover": "cover-31.jpg",
+   "tint": "#44463a",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 32,
+   "title": "The Arch That Took Two Days",
+   "blurb": "Green comes back the next day to build a steadier arch.",
+   "captain": "Captain Green Beard",
+   "theme": "Building resilience",
+   "voyage": {
+    "n": 4,
+    "name": "The Lantern Regatta"
+   },
+   "cover": "cover-32.jpg",
+   "tint": "#4f3b2b",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 33,
+   "title": "Blue's Very Small Treasure",
+   "blurb": "Blue chooses the treasure she loves, even though it fits in one hand.",
+   "captain": "Captain Blue Beard",
+   "theme": "Kindness to ourselves",
+   "voyage": {
+    "n": 4,
+    "name": "The Lantern Regatta"
+   },
+   "cover": "cover-33.jpg",
+   "tint": "#44403b",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 34,
+   "title": "The Pirate Who Polished the Stars",
+   "blurb": "Gold notices Nori\u2019s work and asks how they\u2019d like it acknowledged.",
+   "captain": "Captain Gold Beard",
+   "theme": "Kindness to others",
+   "voyage": {
+    "n": 4,
+    "name": "The Lantern Regatta"
+   },
+   "cover": "cover-34.jpg",
+   "tint": "#4e3e2d",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 35,
+   "title": "The Bucket That Kept Saying Plip",
+   "blurb": "A drip leads to a repaired tap and a drink for dry pots.",
+   "captain": "Captain Purple Beard",
+   "theme": "Kindness to the environment",
+   "voyage": {
+    "n": 4,
+    "name": "The Lantern Regatta"
+   },
+   "cover": "cover-35.jpg",
+   "tint": "#4a3c33",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 36,
+   "title": "The Night the Lanterns Went Out",
+   "blurb": "When seven lights go out, the crew finds one useful thing to practise.",
+   "captain": "Captain Rainbow Beard",
+   "theme": "Building resilience",
+   "voyage": {
+    "n": 4,
+    "name": "The Lantern Regatta"
+   },
+   "cover": "cover-36.jpg",
+   "tint": "#3c3132",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 37,
+   "title": "One Morning for Captain Green",
+   "blurb": "Green keeps a morning for herself and enjoys the sunrise.",
+   "captain": "Captain Green Beard",
+   "theme": "Kindness to ourselves",
+   "voyage": {
+    "n": 4,
+    "name": "The Lantern Regatta"
+   },
+   "cover": "cover-37.jpg",
+   "tint": "#4e4038",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 38,
+   "title": "The Joke That Went Too Far",
+   "blurb": "Red speaks up when a joke hurts Wren and checks what they want.",
+   "captain": "Captain Red Beard",
+   "theme": "Kindness to others",
+   "voyage": {
+    "n": 4,
+    "name": "The Lantern Regatta"
+   },
+   "cover": "cover-38.jpg",
+   "tint": "#4c372a",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 39,
+   "title": "The Treasure That Fed the Soil",
+   "blurb": "The crew discovers what happened to its saved fruit scraps.",
+   "captain": "Captain Blue Beard",
+   "theme": "Kindness to the environment",
+   "voyage": {
+    "n": 4,
+    "name": "The Lantern Regatta"
+   },
+   "cover": "cover-39.jpg",
+   "tint": "#443b2d",
+   "audio": null,
+   "seconds": null
+  },
+  {
+   "n": 40,
+   "title": "The Parade With No Wind",
+   "blurb": "A windless evening gives the crew a new way to hold the parade.",
+   "captain": "Captain Rainbow Beard",
+   "theme": "Building resilience",
+   "voyage": {
+    "n": 4,
+    "name": "The Lantern Regatta"
+   },
+   "cover": "cover-40.jpg",
+   "tint": "#443932",
+   "audio": null,
+   "seconds": null
+  }
+ ]
+}

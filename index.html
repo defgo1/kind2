@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0b2233">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kindness Pirates">
+<title>Kindness Pirates</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b2233; --deep:#06141f; --ink:#fff; --muted:rgba(255,255,255,.72); --faint:rgba(255,255,255,.14);
+  --gold:#f4c95d; --coral:#ff7a59;
+  --t-others:#ff8fa3; --t-ourselves:#f4c95d; --t-environment:#6fd39b; --t-resilience:#6ec3ff;
+  --tint:#123247;
+  --slide:min(76vw, 48vh, 460px);
+  --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--deep);color:var(--ink);font-family:Poppins,system-ui,-apple-system,"Segoe UI",sans-serif;overscroll-behavior:none}
+body{overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+img{-webkit-user-drag:none;user-select:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* ---------- backdrop ---------- */
+#bg{position:fixed;inset:0;z-index:0;background:radial-gradient(120% 90% at 50% 30%, var(--tint) 0%, var(--navy) 55%, var(--deep) 100%)}
+.bgimg{position:absolute;inset:-10%;background-size:cover;background-position:center;filter:blur(48px) saturate(1.25);opacity:0;transition:opacity .7s;transform:scale(1.1)}
+.bgimg.on{opacity:.38}
+#bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,20,31,.35),rgba(6,20,31,.1) 40%,rgba(6,20,31,.75))}
+
+/* ---------- home ---------- */
+#home{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;padding-top:var(--safe-t);padding-bottom:var(--safe-b)}
+header{display:flex;align-items:center;gap:12px;padding:14px 18px 4px}
+.brand{flex:1;min-width:0}
+.brand h1{margin:0;font-family:Fredoka,Poppins,sans-serif;font-weight:700;font-size:clamp(22px,4.4vw,34px);letter-spacing:.3px;line-height:1.05}
+.brand h1 span{color:var(--gold)}
+.brand p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.iconbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--faint);flex:none}
+.iconbtn svg{width:22px;height:22px}
+
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 18px 4px;scrollbar-width:none;flex:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:7px 14px;border-radius:999px;background:var(--faint);font-size:13px;font-weight:500;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.chip i{width:9px;height:9px;border-radius:50%;background:currentColor;display:block}
+.chip[aria-pressed="true"]{background:#fff;color:var(--navy)}
+
+#stage{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}
+#track{display:flex;align-items:center;gap:6px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+  padding:18px calc(50% - var(--slide)/2);scrollbar-width:none;position:relative;perspective:1200px;flex:none}
+#track::-webkit-scrollbar{display:none}
+.slide{flex:none;width:var(--slide);aspect-ratio:1;scroll-snap-align:center;border-radius:22px;padding:0;position:relative;
+  transform-origin:center;will-change:transform,opacity;transition:box-shadow .3s}
+.slide img{width:100%;height:100%;object-fit:cover;border-radius:22px;display:block;background:#1b3a4f}
+.slide.cur{box-shadow:0 22px 50px rgba(0,0,0,.55),0 0 0 3px rgba(255,255,255,.9)}
+.slide .badge{position:absolute;right:10px;top:10px;background:rgba(6,20,31,.78);border-radius:999px;font-size:11px;padding:4px 9px;font-weight:600;display:none}
+.slide.saved .badge{display:block}
+
+#info{text-align:center;padding:4px 22px 0;max-width:640px;margin:0 auto;width:100%}
+.ep{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin:0}
+#title{font-family:Fredoka,Poppins,sans-serif;font-weight:600;font-size:clamp(22px,5vw,32px);margin:4px 0 6px;line-height:1.15;min-height:1.15em}
+.meta{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px 10px;font-size:13px;color:var(--muted)}
+.cap{display:inline-flex;align-items:center;gap:6px}
+.cap b{width:12px;height:12px;border-radius:50%;display:block;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+.theme{padding:3px 10px;border-radius:999px;color:var(--navy);font-weight:600;font-size:12px}
+#blurb{margin:8px auto 0;font-size:15px;line-height:1.45;max-width:30em;min-height:2.9em}
+
+.actions{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 18px 18px}
+#play{display:inline-flex;align-items:center;gap:12px;background:var(--coral);color:#fff;font-weight:600;font-size:19px;
+  padding:16px 34px 16px 26px;border-radius:999px;box-shadow:0 10px 28px rgba(255,122,89,.45);transition:transform .15s}
+#play:active{transform:scale(.97)}
+#play svg{width:26px;height:26px}
+#restart{font-size:13px;color:var(--muted);padding:6px 10px;text-decoration:underline;text-underline-offset:3px;visibility:hidden}
+#restart.show{visibility:visible}
+
+/* ---------- player (locked) ---------- */
+#player{position:fixed;inset:0;z-index:20;background:var(--deep);display:none;touch-action:none;overflow:hidden}
+body.locked #player{display:block}
+body.locked{touch-action:none}
+#pbg{position:absolute;inset:-12%;background-size:cover;background-position:center;filter:blur(50px) saturate(1.3) brightness(.55);transform:scale(1.1)}
+#pcover{position:absolute;left:50%;top:47%;width:min(90vw,80vh);aspect-ratio:1;transform:translate(-50%,-50%);
+  border-radius:clamp(14px,3vw,28px);box-shadow:0 30px 80px rgba(0,0,0,.6);object-fit:cover;pointer-events:none;
+  animation:breathe 9s ease-in-out infinite}
+@keyframes breathe{50%{transform:translate(-50%,-50%) scale(1.012)}}
+#pbar{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(22px + var(--safe-b));width:min(70vw,560px);height:8px;border-radius:9px;background:rgba(255,255,255,.18);pointer-events:none;transition:opacity 1s}
+#pfill{height:100%;width:0;border-radius:9px;background:var(--gold);position:relative;transition:width .9s linear}
+#pfill::after{content:"";position:absolute;right:-8px;top:50%;width:16px;height:16px;margin-top:-8px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(244,201,93,.45)}
+#lockbtn{position:absolute;top:calc(14px + var(--safe-t));right:14px;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(0,0,0,.22);opacity:.5;z-index:3;touch-action:none}
+#lockbtn svg.ic{width:22px;height:22px}
+#lockbtn svg.ring{position:absolute;inset:0;width:56px;height:56px;transform:rotate(-90deg)}
+#lockbtn circle{fill:none;stroke:var(--gold);stroke-width:4;stroke-linecap:round;stroke-dasharray:157;stroke-dashoffset:157}
+#lockbtn.holding{opacity:1}
+#lockbtn.holding circle{stroke-dashoffset:0;transition:stroke-dashoffset var(--hold,3s) linear}
+#hint{position:absolute;top:calc(24px + var(--safe-t));right:80px;font-size:13px;background:rgba(0,0,0,.45);padding:8px 12px;border-radius:10px;
+  opacity:0;transition:opacity .5s;pointer-events:none;max-width:60vw}
+#hint.show{opacity:1}
+#status{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);font-family:Fredoka,Poppins,sans-serif;font-size:clamp(20px,4vw,30px);
+  background:rgba(6,20,31,.72);padding:16px 26px;border-radius:18px;display:none;text-align:center;pointer-events:none;white-space:pre-line;max-width:86vw}
+#status.show{display:block}
+#startbtn{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:120px;height:120px;border-radius:50%;background:var(--coral);
+  display:none;place-items:center;box-shadow:0 12px 40px rgba(0,0,0,.5);z-index:2}
+#startbtn.show{display:grid}
+#startbtn svg{width:54px;height:54px;margin-left:6px}
+#theend{position:absolute;left:0;right:0;bottom:calc(60px + var(--safe-b));text-align:center;font-family:Fredoka,Poppins,sans-serif;font-weight:700;
+  font-size:clamp(34px,8vw,64px);color:#fff;text-shadow:0 4px 18px rgba(0,0,0,.6);opacity:0;transition:opacity 1.6s;pointer-events:none}
+body.ended #theend{opacity:1}
+body.ended #pbar{opacity:0}
+
+#panel{position:absolute;inset:0;z-index:5;display:none;place-items:center;background:rgba(6,20,31,.55);touch-action:none}
+#panel.show{display:grid}
+.card{background:#fff;color:var(--navy);border-radius:22px;padding:20px;width:min(88vw,360px);display:grid;gap:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.card h3{margin:0 0 2px;font-family:Fredoka,Poppins,sans-serif;font-size:20px}
+.card p{margin:0 0 6px;font-size:13px;color:#4a5b68}
+.prow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pbtn{padding:13px 12px;border-radius:14px;background:#eef3f6;font-weight:600;font-size:15px}
+.pbtn.primary{background:var(--coral);color:#fff}
+.pbtn.ghost{background:none;color:#4a5b68;font-weight:500}
+
+/* ---------- settings ---------- */
+dialog{border:0;border-radius:22px;padding:0;width:min(92vw,460px);max-height:86vh;background:#fff;color:var(--navy)}
+dialog::backdrop{background:rgba(6,20,31,.6)}
+.sheet{padding:20px 20px 16px;display:grid;gap:14px;font-size:14px;line-height:1.45}
+.sheet h2{margin:0;font-family:Fredoka,Poppins,sans-serif;font-size:22px}
+.sheet h4{margin:4px 0 2px;font-size:14px}
+.sheet p,.sheet ol{margin:0;color:#3d4f5c}
+.sheet ol{padding-left:20px}
+.sbtn{padding:12px 16px;border-radius:14px;background:var(--navy);color:#fff;font-weight:600;width:100%}
+.sbtn.alt{background:#eef3f6;color:var(--navy)}
+.sbtn:disabled{opacity:.6}
+.meter{height:8px;border-radius:8px;background:#e4ebef;overflow:hidden;display:none}
+.meter.show{display:block}
+.meter i{display:block;height:100%;width:0;background:var(--coral);transition:width .2s}
+.small{font-size:12px;color:#5c6d79}
+
+@media (orientation:landscape) and (max-height:600px){
+  :root{--slide:min(38vw,56vh,340px)}
+  #home{display:grid;grid-template-columns:1.1fr 1fr;grid-template-rows:auto auto 1fr auto;padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+  header,.chips{grid-column:1/-1}
+  header{padding-top:8px}
+  .chips{padding-top:6px}
+  #stage{display:contents}
+  #track{grid-column:1;grid-row:3/5;align-self:center;padding-top:6px;padding-bottom:6px}
+  #info{grid-column:2;grid-row:3;align-self:end;text-align:left;padding:0 22px 0 4px}
+  .meta{justify-content:flex-start}
+  #blurb{margin-left:0;min-height:0;font-size:14px}
+  .actions{grid-column:2;grid-row:4;align-items:flex-start;padding:10px 18px 14px 4px}
+  #play{font-size:17px;padding:13px 28px 13px 22px}
+}
+@media (orientation:portrait) and (max-height:760px){
+  :root{--slide:min(70vw,36vh,400px)}
+  #track{padding-top:10px;padding-bottom:10px}
+  #blurb{font-size:14px;margin-top:6px}
+  .actions{padding:10px 18px 12px}
+}
+#blurb{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+body:not(.ready) #stage,body:not(.ready) .actions,body:not(.ready) .chips{visibility:hidden}
+@media (prefers-reduced-motion:reduce){#pcover{animation:none}}
+</style>
+</head>
+<body>
+<div id="bg"><div class="bgimg" id="bgA"></div><div class="bgimg" id="bgB"></div></div>
+
+<main id="home">
+  <header>
+    <div class="brand">
+      <h1>Kindness <span>Pirates</span></h1>
+      <p id="count">The Colourbeard Pirates</p>
+    </div>
+    <button class="iconbtn" id="gear" aria-label="Grown-ups: settings and help">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+    </button>
+  </header>
+  <nav class="chips" id="chips" aria-label="Filter by kindness theme"></nav>
+  <section id="stage">
+    <div id="track" role="listbox" aria-label="Stories"></div>
+    <div id="info">
+      <p class="ep" id="ep">&nbsp;</p>
+      <h2 id="title"></h2>
+      <div class="meta"><span class="cap"><b id="capdot"></b><span id="cap"></span></span><span class="theme" id="theme"></span><span id="len"></span></div>
+      <p id="blurb"></p>
+    </div>
+  </section>
+  <div class="actions">
+    <button id="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg><span id="playlabel">Play story</span></button>
+    <button id="restart">Start from the beginning</button>
+  </div>
+</main>
+
+<div id="player" aria-live="polite">
+  <div id="pbg"></div>
+  <img id="pcover" alt="">
+  <div id="status"></div>
+  <button id="startbtn" aria-label="Start the story"><svg viewBox="0 0 24 24" fill="#fff"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg></button>
+  <div id="theend">The End</div>
+  <div id="pbar"><div id="pfill"></div></div>
+  <div id="hint">Grown-ups: hold the lock for 3 seconds</div>
+  <button id="lockbtn" aria-label="Grown-ups: press and hold to unlock">
+    <svg class="ring" viewBox="0 0 56 56"><circle cx="28" cy="28" r="25"/></svg>
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+  </button>
+  <div id="panel">
+    <div class="card" role="dialog" aria-label="Grown-up controls">
+      <h3>Grown-up controls</h3>
+      <p id="ptitle"></p>
+      <div class="prow"><button class="pbtn" data-a="back">↺ Back 15 s</button><button class="pbtn" data-a="toggle" id="ptoggle">Pause</button></div>
+      <button class="pbtn" data-a="restart">Start story again</button>
+      <button class="pbtn primary" data-a="exit">Back to the stories</button>
+      <button class="pbtn ghost" data-a="close">Keep it locked</button>
+    </div>
+  </div>
+</div>
+
+<audio id="aud" preload="auto" playsinline></audio>
+
+<dialog id="settings">
+  <div class="sheet">
+    <h2>Grown-ups</h2>
+    <div>
+      <h4>How it works</h4>
+      <p>Swipe the covers to choose a story, then press <b>Play story</b>. The screen locks onto the cover while the story plays, so little hands can't change anything. To unlock, press and hold the lock in the top corner for 3 seconds.</p>
+    </div>
+    <div>
+      <h4>Listen without internet</h4>
+      <p id="offtext">Stories save themselves after they're played once. You can save them all now.</p>
+      <div class="meter" id="meter"><i></i></div>
+    </div>
+    <button class="sbtn" id="saveall">Save all stories</button>
+    <div id="installbox" hidden>
+      <h4>Put it on the home screen</h4>
+      <p id="installtext"></p>
+      <button class="sbtn alt" id="installbtn" hidden>Install the app</button>
+    </div>
+    <div>
+      <h4>Lock the whole device (recommended)</h4>
+      <p>The app ignores taps on the story screen, but no app on a web page can block the home swipe or home button. For a full lock, also turn on the device's own lock:</p>
+      <ol>
+        <li><b>iPhone / iPad – Guided Access:</b> Settings → Accessibility → Guided Access → On. Start a story, then triple-click the side (or home) button and tap Start. Triple-click again to finish.</li>
+        <li><b>Android – App pinning:</b> Settings → Security → App pinning → On. Open the app, open Recents, tap the app's icon and choose Pin.</li>
+      </ol>
+    </div>
+    <button class="sbtn alt" id="closeset">Done</button>
+    <p class="small" id="ver"></p>
+  </div>
+</dialog>
+<script src="stories.js"></script>
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const LS = {
+  get(k, d) { try { const v = localStorage.getItem('kp.' + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem('kp.' + k, JSON.stringify(v)); } catch {} }
+};
+const AUDIO_CACHE = 'kp-audio-v1';
+const HOLD_MS = 3000;
+const THEMES = [
+  ['all', 'All stories', null],
+  ['Kindness to others', 'Others', 'var(--t-others)'],
+  ['Kindness to ourselves', 'Ourselves', 'var(--t-ourselves)'],
+  ['Kindness to the environment', 'Environment', 'var(--t-environment)'],
+  ['Building resilience', 'Resilience', 'var(--t-resilience)'],
+];
+const themeColour = t => (THEMES.find(x => x[0] === t) || [])[2] || '#ddd';
+const CAPTAINS = {
+  Rainbow: 'conic-gradient(#ff5d5d,#ffb347,#ffe066,#6fd39b,#6ec3ff,#a98bff,#ff5d5d)',
+  Red: '#e5484d', Gold: '#f4c95d', Green: '#46b97a', Blue: '#3f8ee0', Purple: '#9b6bdf', Orange: '#f28c38'
+};
+const fmt = s => { s = Math.max(0, Math.round(s || 0)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+
+let ALL = [], list = [], cur = 0, filter = LS.get('filter', 'all');
+const saved = new Set();
+const track = $('#track'), aud = $('#aud'), body = document.body;
+
+/* ================= data ================= */
+async function load() {
+  try {
+    let d = null;
+    if (location.protocol !== 'file:') {
+      try { const r = await fetch('stories.json', { cache: 'no-cache' }); if (r.ok) d = await r.json(); } catch {}
+    }
+    if (!d) d = window.KP_STORIES;
+    if (!d || !d.stories) throw new Error('no stories');
+    ALL = d.stories.filter(s => s.audio);
+    $('#count').textContent = `${d.series} · ${ALL.length} ${ALL.length === 1 ? 'story' : 'stories'}`;
+  } catch (e) {
+    $('#count').textContent = 'Could not load the stories – check the internet and try again.';
+    return;
+  }
+  body.classList.add('ready');
+  renderChips();
+  renderTrack(LS.get('last', ALL[0] && ALL[0].n));
+  await refreshSaved();
+}
+
+/* ================= chips ================= */
+function renderChips() {
+  const box = $('#chips');
+  box.innerHTML = '';
+  for (const [key, label, col] of THEMES) {
+    if (key !== 'all' && !ALL.some(s => s.theme === key)) continue;
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.setAttribute('aria-pressed', String(filter === key));
+    b.innerHTML = (col ? `<i style="color:${col}"></i>` : '') + label;
+    b.onclick = () => {
+      filter = key; LS.set('filter', key);
+      [...box.children].forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+      renderTrack(list[cur] && list[cur].n);
+    };
+    box.appendChild(b);
+  }
+}
+
+/* ================= carousel ================= */
+function renderTrack(keepN) {
+  list = filter === 'all' ? ALL : ALL.filter(s => s.theme === filter);
+  if (!list.length) { list = ALL; filter = 'all'; }
+  track.innerHTML = '';
+  list.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.className = 'slide' + (saved.has(s.n) ? ' saved' : '');
+    b.setAttribute('role', 'option');
+    b.setAttribute('aria-label', s.title);
+    b.innerHTML = `<img src="${s.cover}" alt="" draggable="false"><span class="badge">✓ Saved</span>`;
+    b.onclick = () => { if (i === cur) startStory(list[cur], false); else go(i); };
+    track.appendChild(b);
+  });
+  const idx = Math.max(0, list.findIndex(s => s.n === keepN));
+  cur = -1;
+  requestAnimationFrame(() => { go(idx, true); layout(); });
+}
+function go(i, instant) {
+  i = Math.max(0, Math.min(list.length - 1, i));
+  const el = track.children[i];
+  if (!el) return;
+  const left = el.offsetLeft + el.offsetWidth / 2 - track.clientWidth / 2;
+  track.scrollTo({ left, behavior: instant ? 'auto' : 'smooth' });
+  if (instant) select(i);
+}
+let raf = 0;
+track.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; layout(); }); }, { passive: true });
+window.addEventListener('resize', () => { if (!list.length) return; const n = list[cur] && list[cur].n; go(Math.max(0, list.findIndex(s => s.n === n)), true); layout(); });
+function layout() {
+  const c = track.scrollLeft + track.clientWidth / 2;
+  let best = 0, bestD = Infinity;
+  [...track.children].forEach((el, i) => {
+    const d = (el.offsetLeft + el.offsetWidth / 2 - c) / el.offsetWidth;
+    const ad = Math.min(Math.abs(d), 1.6);
+    el.style.transform = `scale(${1 - 0.2 * Math.min(ad, 1)}) rotateY(${Math.max(-24, Math.min(24, -d * 22))}deg)`;
+    el.style.opacity = String(1 - 0.38 * Math.min(ad, 1.3));
+    el.style.zIndex = String(10 - Math.round(ad * 4));
+    if (Math.abs(d) < bestD) { bestD = Math.abs(d); best = i; }
+  });
+  if (best !== cur) select(best);
+}
+let bgFlip = false;
+function select(i) {
+  cur = i;
+  const s = list[i];
+  if (!s) return;
+  [...track.children].forEach((el, j) => el.classList.toggle('cur', j === i));
+  LS.set('last', s.n);
+  $('#ep').textContent = `Episode ${String(s.n).padStart(2, '0')}` + (s.voyage ? ` · ${s.voyage.name}` : '');
+  $('#title').textContent = s.title;
+  $('#cap').textContent = s.captain || '';
+  const key = (s.captain || '').split(' ')[1];
+  $('#capdot').style.background = CAPTAINS[key] || '#fff';
+  $('#capdot').parentElement.style.display = s.captain ? '' : 'none';
+  const th = $('#theme');
+  th.textContent = s.theme || ''; th.style.background = themeColour(s.theme); th.style.display = s.theme ? '' : 'none';
+  $('#len').textContent = fmt(s.seconds) + (saved.has(s.n) ? ' · saved' : '');
+  $('#blurb').textContent = s.blurb || '';
+  document.documentElement.style.setProperty('--tint', s.tint || '#123247');
+  const a = $(bgFlip ? '#bgA' : '#bgB'), b = $(bgFlip ? '#bgB' : '#bgA');
+  a.style.backgroundImage = `url("${s.cover}")`; a.classList.add('on'); b.classList.remove('on'); bgFlip = !bgFlip;
+  const pos = LS.get('pos.' + s.n, 0);
+  const resumable = pos > 10 && pos < (s.seconds || 1e9) - 15;
+  $('#playlabel').textContent = resumable ? `Keep listening (${fmt(pos)})` : 'Play story';
+  $('#restart').classList.toggle('show', resumable);
+}
+$('#play').onclick = () => list[cur] && startStory(list[cur], false);
+$('#restart').onclick = () => list[cur] && startStory(list[cur], true);
+document.addEventListener('keydown', e => {
+  if (body.classList.contains('locked') || $('#settings').open) return;
+  if (e.key === 'ArrowRight') go(cur + 1);
+  else if (e.key === 'ArrowLeft') go(cur - 1);
+});
+
+/* ================= playing + lock ================= */
+let playing = null, startAt = 0, wake = null, lastSave = 0;
+
+function startStory(s, fromStart) {
+  playing = s;
+  const pos = fromStart ? 0 : LS.get('pos.' + s.n, 0);
+  startAt = pos > 10 && pos < s.seconds - 15 ? pos : 0;
+  body.classList.remove('ended');
+  $('#pcover').src = s.cover;
+  $('#pbg').style.backgroundImage = `url("${s.cover}")`;
+  $('#pfill').style.width = (startAt && s.seconds ? (startAt / s.seconds) * 100 : 0) + '%';
+  $('#ptitle').textContent = s.title;
+  $('#startbtn').classList.remove('show');
+  // src + play() must happen inside the tap for iPhone/iPad to allow sound
+  aud.src = s.audio;
+  const p = aud.play();
+  if (p && p.catch) p.catch(() => { if (aud.paused && body.classList.contains('locked')) { setStatus(''); $('#startbtn').classList.add('show'); } });
+  setStatus('Hoisting the sails…');
+  lock();
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: s.title, artist: 'The Colourbeard Pirates', album: 'Kindness Pirates',
+        artwork: [{ src: new URL(s.cover, location.href).href, sizes: '720x720', type: 'image/jpeg' }] });
+    } catch {}
+  }
+  if (!saved.has(s.n) && location.protocol !== 'file:') setTimeout(() => saveStory(s).catch(() => {}), 4000);
+}
+function setStatus(t) { const el = $('#status'); el.textContent = t; el.classList.toggle('show', !!t); }
+aud.addEventListener('loadedmetadata', () => { if (startAt) { try { aud.currentTime = startAt; } catch {} startAt = 0; } });
+aud.addEventListener('playing', () => { setStatus(''); $('#startbtn').classList.remove('show'); $('#ptoggle').textContent = 'Pause'; });
+aud.addEventListener('pause', () => { $('#ptoggle').textContent = 'Play'; savePos(true); });
+aud.addEventListener('waiting', () => { if (aud.currentTime < 1) setStatus('Hoisting the sails…'); });
+aud.addEventListener('error', () => {
+  if (body.classList.contains('locked') && aud.getAttribute('src')) setStatus('This story needs the internet the first time.\nGrown-ups: hold the lock to go back.');
+});
+aud.addEventListener('timeupdate', () => {
+  if (!playing) return;
+  const d = aud.duration || playing.seconds;
+  if (d) $('#pfill').style.width = (aud.currentTime / d) * 100 + '%';
+  savePos(false);
+});
+aud.addEventListener('ended', () => {
+  body.classList.add('ended');
+  $('#pfill').style.width = '100%';
+  if (playing) LS.set('pos.' + playing.n, 0);
+  $('#ptoggle').textContent = 'Play';
+  releaseWake();
+});
+function savePos(force) {
+  if (!playing || aud.ended) return;
+  const now = Date.now();
+  if (!force && now - lastSave < 3000) return;
+  lastSave = now;
+  if (aud.currentTime > 0) LS.set('pos.' + playing.n, Math.floor(aud.currentTime));
+}
+$('#startbtn').addEventListener('click', e => { e.stopPropagation(); aud.play().catch(() => {}); });
+
+function lock() {
+  body.classList.add('locked');
+  if (!(history.state && history.state.kpLock)) history.pushState({ kpLock: 1 }, '');
+  enterFullscreen();
+  requestWake();
+  const h = $('#hint'); h.classList.add('show'); setTimeout(() => h.classList.remove('show'), 3500);
+}
+function unlock() {
+  savePos(true);
+  body.classList.remove('locked', 'ended');
+  closePanel();
+  aud.pause();
+  releaseWake();
+  exitFullscreen();
+  if (history.state && history.state.kpLock) history.back();
+  playing = null;
+  if (list[cur]) select(cur);
+}
+// Android back button / back gesture: stay on the story
+window.addEventListener('popstate', () => { if (body.classList.contains('locked')) history.pushState({ kpLock: 1 }, ''); });
+window.addEventListener('beforeunload', e => { if (body.classList.contains('locked')) { e.preventDefault(); e.returnValue = ''; } });
+
+function fsElement() { return document.fullscreenElement || document.webkitFullscreenElement; }
+function enterFullscreen() {
+  const el = document.documentElement;
+  const fn = el.requestFullscreen || el.webkitRequestFullscreen;
+  if (fn && !fsElement()) { try { const r = fn.call(el, { navigationUI: 'hide' }); if (r && r.catch) r.catch(() => {}); } catch {} }
+}
+function exitFullscreen() {
+  const fn = document.exitFullscreen || document.webkitExitFullscreen;
+  if (fn && fsElement()) { try { const r = fn.call(document); if (r && r.catch) r.catch(() => {}); } catch {} }
+}
+async function requestWake() {
+  try { if ('wakeLock' in navigator && !wake) { wake = await navigator.wakeLock.request('screen'); wake.addEventListener('release', () => { wake = null; }); } } catch { wake = null; }
+}
+function releaseWake() { try { wake && wake.release(); } catch {} wake = null; }
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && body.classList.contains('locked') && !body.classList.contains('ended')) requestWake();
+});
+
+// Swallow every touch on the locked screen (except the grown-up lock, its panel and the start button)
+const player = $('#player');
+const allowed = t => t && t.closest && t.closest('#lockbtn, #panel .card, #startbtn');
+player.addEventListener('touchstart', e => { if (e.touches.length > 1 || !allowed(e.target)) e.preventDefault(); }, { passive: false });
+player.addEventListener('click', e => { if (!allowed(e.target)) { e.preventDefault(); if (e.target === $('#panel')) closePanel(); enterFullscreen(); } });
+player.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('gesturestart', e => e.preventDefault());
+document.addEventListener('dblclick', e => { if (body.classList.contains('locked')) e.preventDefault(); });
+document.addEventListener('touchmove', e => { if (body.classList.contains('locked')) e.preventDefault(); }, { passive: false });
+document.addEventListener('keydown', e => { if (body.classList.contains('locked') && !allowed(e.target)) e.preventDefault(); });
+
+// Grown-up unlock: press and hold
+const lb = $('#lockbtn');
+lb.style.setProperty('--hold', HOLD_MS + 'ms');
+let holdTimer = 0;
+lb.addEventListener('pointerdown', e => {
+  e.preventDefault();
+  try { lb.setPointerCapture(e.pointerId); } catch {}
+  lb.classList.add('holding');
+  clearTimeout(holdTimer);
+  holdTimer = setTimeout(() => { lb.classList.remove('holding'); openPanel(); }, HOLD_MS);
+});
+['pointerup', 'pointercancel', 'lostpointercapture'].forEach(ev => lb.addEventListener(ev, () => { clearTimeout(holdTimer); lb.classList.remove('holding'); }));
+lb.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); });
+
+let panelTimer = 0;
+function openPanel() {
+  $('#panel').classList.add('show');
+  $('#ptoggle').textContent = aud.paused ? 'Play' : 'Pause';
+  bumpPanel();
+}
+function closePanel() { $('#panel').classList.remove('show'); clearTimeout(panelTimer); }
+function bumpPanel() { clearTimeout(panelTimer); panelTimer = setTimeout(closePanel, 12000); }
+$('#panel').addEventListener('click', e => {
+  const a = e.target.closest('[data-a]');
+  if (!a) return;
+  e.stopPropagation();
+  bumpPanel();
+  switch (a.dataset.a) {
+    case 'back': aud.currentTime = Math.max(0, aud.currentTime - 15); break;
+    case 'toggle':
+      if (aud.paused) { if (aud.ended) aud.currentTime = 0; body.classList.remove('ended'); aud.play().catch(() => {}); requestWake(); closePanel(); }
+      else aud.pause();
+      break;
+    case 'restart': body.classList.remove('ended'); aud.currentTime = 0; aud.play().catch(() => {}); requestWake(); closePanel(); break;
+    case 'exit': unlock(); break;
+    case 'close': closePanel(); enterFullscreen(); break;
+  }
+});
+
+/* ================= offline saving ================= */
+async function refreshSaved() {
+  if (!('caches' in window)) return;
+  try {
+    const c = await caches.open(AUDIO_CACHE);
+    for (const s of ALL) if (await c.match(new URL(s.audio, location.href).href)) saved.add(s.n);
+  } catch {}
+  markSaved();
+}
+function markSaved() {
+  [...track.children].forEach((el, i) => list[i] && el.classList.toggle('saved', saved.has(list[i].n)));
+  const n = saved.size, t = ALL.length;
+  const mb = ALL.filter(s => !saved.has(s.n)).reduce((a, s) => a + (s.bytes || 0), 0) / 1048576;
+  $('#offtext').textContent = n === t ? `All ${t} stories are saved on this device. They'll play without internet.`
+    : `${n} of ${t} stories saved on this device. Stories save themselves after they're played once.`;
+  $('#saveall').textContent = n === t ? 'All saved ✓' : `Save all stories (${Math.max(1, Math.round(mb))} MB)`;
+  $('#saveall').disabled = n === t || !('caches' in window);
+  if (location.protocol === 'file:') {
+    $('#offtext').textContent = 'Opened straight from the folder: stories play, but they can only be saved for offline (and installed) from the website version.';
+    $('#saveall').textContent = 'Save all stories'; $('#saveall').disabled = true;
+  }
+  if (list[cur] && !playing) $('#len').textContent = fmt(list[cur].seconds) + (saved.has(list[cur].n) ? ' · saved' : '');
+}
+async function saveStory(s, onBytes) {
+  if (!('caches' in window) || saved.has(s.n)) return;
+  const url = new URL(s.audio, location.href).href;
+  const res = await fetch(url, { cache: 'no-cache' });
+  if (!res.ok) throw new Error(res.status);
+  let blob;
+  if (onBytes && res.body && res.body.getReader) {
+    const rd = res.body.getReader(), parts = [];
+    for (;;) { const { done, value } = await rd.read(); if (done) break; parts.push(value); onBytes(value.length); }
+    blob = new Blob(parts, { type: 'audio/mpeg' });
+  } else blob = await res.blob();
+  const c = await caches.open(AUDIO_CACHE);
+  await c.put(url, new Response(blob, { headers: { 'Content-Type': 'audio/mpeg', 'Content-Length': String(blob.size) } }));
+  saved.add(s.n);
+  markSaved();
+}
+$('#saveall').onclick = async () => {
+  const todo = ALL.filter(s => !saved.has(s.n));
+  const total = todo.reduce((a, s) => a + (s.bytes || 1), 0);
+  let got = 0;
+  const m = $('#meter'), bar = m.firstElementChild;
+  m.classList.add('show'); $('#saveall').disabled = true; $('#saveall').textContent = 'Saving…';
+  try {
+    if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+    for (const s of todo) await saveStory(s, n => { got += n; bar.style.width = Math.min(100, got / total * 100) + '%'; });
+    markSaved();
+  } catch (e) {
+    markSaved();
+    $('#offtext').textContent = 'Saving stopped – check the internet connection and try again.';
+  }
+  m.classList.remove('show');
+};
+
+/* ================= settings / install ================= */
+const dlg = $('#settings');
+$('#gear').onclick = () => { markSaved(); dlg.showModal(); };
+$('#closeset').onclick = () => dlg.close();
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+const standalone = matchMedia('(display-mode: standalone), (display-mode: fullscreen)').matches || navigator.standalone;
+const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+let deferred = null;
+if (!standalone) {
+  if (isIOS) {
+    $('#installbox').hidden = false;
+    $('#installtext').textContent = 'In Safari, tap the Share button, then "Add to Home Screen". Opened from the home screen it runs without the browser bars.';
+  }
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault(); deferred = e;
+    $('#installbox').hidden = false; $('#installbtn').hidden = false;
+    $('#installtext').textContent = 'Install it so it opens full screen, like a normal app.';
+  });
+  $('#installbtn').onclick = async () => { if (!deferred) return; deferred.prompt(); await deferred.userChoice; deferred = null; $('#installbox').hidden = true; };
+}
+
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  navigator.serviceWorker.register('sw.js').then(() => { $('#ver').textContent = 'Works offline once stories are saved.'; }).catch(() => {});
+}
+load();
+})();
+</script>
+</body>
+</html>
